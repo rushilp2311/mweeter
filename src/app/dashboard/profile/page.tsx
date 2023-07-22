@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-
-
 const Profile = () => {
   const router = useRouter();
   const authUser = getCurrentUser();
@@ -19,7 +17,9 @@ const Profile = () => {
       .eq("email", user.email);
 
     if (!error) {
-      window.localStorage.setItem("user", JSON.stringify(user));
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("user", JSON.stringify(user));
+      }
       toast("Profile Updated", { type: "success" });
       router.refresh();
     }
@@ -28,6 +28,8 @@ const Profile = () => {
   const updateUser = (type: string, value: string) => {
     setUser({ ...user, [type]: value });
   };
+
+  if (!user) return <></>;
 
   return (
     <div className="h-full py-10 px-20  w-1/2">

@@ -2,10 +2,12 @@
 import { supabase } from "@/supabase";
 
 export const getCurrentUser = () => {
-  const localStorageUser = window.localStorage.getItem("user");
+  if (typeof window !== "undefined") {
+    const localStorageUser = window.localStorage.getItem("user");
 
-  if (localStorageUser) {
-    return JSON.parse(localStorageUser);
+    if (localStorageUser) {
+      return JSON.parse(localStorageUser);
+    }
   }
 };
 
@@ -26,7 +28,9 @@ export const handleLogin = async () => {
     .eq("email", user_metadata.email);
 
   if (currentUser && currentUser[0]) {
-    window.localStorage.setItem("user", JSON.stringify(currentUser[0]));
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("user", JSON.stringify(currentUser[0]));
+    }
     return;
   }
   //  storing in supabase user table
@@ -47,7 +51,8 @@ export const handleLogin = async () => {
 
 export const handleLogout = async () => {
   await supabase.auth.signOut();
-
-  window.localStorage.clear();
-  window.location.href = "/";
+  if (typeof window !== "undefined") {
+    window.localStorage.clear();
+    window.location.href = "/";
+  }
 };
