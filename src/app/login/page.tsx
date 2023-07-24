@@ -34,7 +34,11 @@ const Login = () => {
         >
           <FcGoogle size={24} /> <p className="ml-2">Sign In with Google</p>
         </button>
-        <button className="px-4 ml-3 flex hover:bg-gray-200 items-center py-2 border border-gray-400 text-gray-600 rounded">
+
+        <button
+          disabled
+          className="px-4 ml-3 flex hover:bg-gray-200 items-center py-2 border border-gray-400 text-gray-600 rounded"
+        >
           <Image src={Logo} alt="Microsoft Logo" className="h-5 w-5" />{" "}
           <p className="ml-2">Sign In with Microsoft</p>
         </button>

@@ -1,6 +1,6 @@
 "use client";
 import "./globals.css";
-import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,6 +28,7 @@ export default function RootLayout({
           pauseOnHover
           theme="dark"
         />
+        <Analytics />
       </body>
     </html>
   );
