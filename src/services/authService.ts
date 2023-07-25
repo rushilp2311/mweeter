@@ -31,7 +31,7 @@ export const handleLogin = async () => {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("user", JSON.stringify(currentUser[0]));
     }
-    return;
+    return currentUser[0];
   }
   //  storing in supabase user table
 
@@ -49,6 +49,14 @@ export const handleLogin = async () => {
       },
     ])
     .select();
+
+  if (data && data[0]) {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("user", JSON.stringify(data[0]));
+    }
+
+    return data[0];
+  }
 };
 
 export const handleLogout = async () => {

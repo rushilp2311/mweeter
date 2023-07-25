@@ -35,9 +35,8 @@ export default function Home() {
     const fetchCurrentUser = async () => {
       setLoading(true);
 
-      await handleLogin();
+      const user = await handleLogin();
 
-      const user = getCurrentUser();
       if (user) {
         router.replace("/dashboard");
       }
