@@ -21,7 +21,8 @@ const Home = () => {
   const fetchMweets = async () => {
     const { data: followers } = await supabase
       .from("followers")
-      .select(`following `);
+      .select(`following `)
+      .eq("user", user.id);
 
     const { data } = await supabase
       .from("mweets")
@@ -79,7 +80,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchMweets();
-  }, []);
+  }, [followerSuggestionList]);
 
   const handleFollow = async (followingUserId: string) => {
     const { data, error } = await supabase

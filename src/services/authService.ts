@@ -35,14 +35,16 @@ export const handleLogin = async () => {
   }
   //  storing in supabase user table
 
+  const [firstName, lastName] = user_metadata.full_name.split(" ");
+
   const { data, error } = await supabase
     .from("Users")
     .insert([
       {
-        firstName: user_metadata.firstName,
-        lastName: user_metadata.lastName,
+        firstName: firstName,
+        lastName: lastName,
         email: user_metadata.email,
-        userName: `${user_metadata.firstName.toLowerCase()}${user_metadata.lastName.toLowerCase()}`,
+        userName: `${firstName.toLowerCase()}${lastName.toLowerCase()}`,
         avatar: user_metadata.picture,
       },
     ])
